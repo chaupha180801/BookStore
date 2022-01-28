@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81924019-a460-42c5-a202-8c34918bf009">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="9"/>
+	<parameter name="year from NgayHD" class="java.lang.String"/>
+	<queryString language="plsql">
+		<![CDATA[select distinct extract( month from qlnhasach.hoadon.NgayHD), trunc(qlnhasach.hoadon.ngayhd), sum( qlnhasach.HoaDon.ThanhTien) as TongThanhTien, count(distinct qlnhasach.hoadon.mahd) as SLHD
+from qlnhasach.hoadon
+where extract (year from qlnhasach.hoadon.ngayhd) =$P{year from NgayHD}
+group by extract( month from qlnhasach.hoadon.NgayHD), trunc(qlnhasach.hoadon.ngayhd)
+order by extract( month from qlnhasach.hoadon.NgayHD) asc]]>
+	</queryString>
+	<field name="EXTRACT(MONTHFROMQLNHASACH.HOADON.NGAYHD)" class="java.math.BigDecimal"/>
+	<field name="TRUNC(QLNHASACH.HOADON.NGAYHD)" class="java.sql.Timestamp"/>
+	<field name="TONGTHANHTIEN" class="java.math.BigDecimal"/>
+	<field name="SLHD" class="java.math.BigDecimal"/>
+	<variable name="SLHD_1" class="java.math.BigDecimal" resetType="Group" resetGroup="month_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{SLHD}]]></variableExpression>
+	</variable>
+	<variable name="TONGTHANHTIEN_1" class="java.math.BigDecimal" resetType="Group" resetGroup="month_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{TONGTHANHTIEN}]]></variableExpression>
+	</variable>
+	<variable name="TONGTHANHTIEN_2" class="java.math.BigDecimal" resetType="Group" resetGroup="month_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{TONGTHANHTIEN}]]></variableExpression>
+	</variable>
+	<variable name="SLHD_2" class="java.math.BigDecimal" resetType="Group" resetGroup="month_group" calculation="Sum">
+		<variableExpression><![CDATA[$F{SLHD}]]></variableExpression>
+	</variable>
+	<group name="month_group">
+		<groupExpression><![CDATA[$F{EXTRACT(MONTHFROMQLNHASACH.HOADON.NGAYHD)}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<rectangle>
+					<reportElement x="0" y="0" width="284" height="27" forecolor="#CCFFCC" backcolor="#CCFFCC" uuid="e6577f9c-b9fb-48cd-82e1-3f1b1f547940"/>
+				</rectangle>
+				<textField>
+					<reportElement x="72" y="3" width="100" height="15" forecolor="#3C505C" uuid="b64f2487-a6bb-481b-8f60-09bb034692dd"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{EXTRACT(MONTHFROMQLNHASACH.HOADON.NGAYHD)}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="284" y="0" width="140" height="27" forecolor="#CCFFCC" backcolor="#CCFFCC" uuid="14d238ee-b739-485a-b894-d5d82154dc97"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="424" y="0" width="131" height="27" forecolor="#CCFFCC" backcolor="#CCFFCC" uuid="3aa3027e-5d55-4e99-a913-faf1dc902f0e"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="11" y="0" width="61" height="27" forecolor="#3C505C" uuid="e48dc86f-8026-4fa5-af78-28159381c339"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="15" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Month]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="41">
+				<staticText>
+					<reportElement x="170" y="12" width="100" height="20" uuid="bcb4de9e-e430-4cca-b686-4ec098fc3feb"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="13" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Total: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="440" y="7" width="100" height="20" uuid="ef62118e-cd02-41ba-94a7-39026a8b69dc"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TONGTHANHTIEN_2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="304" y="9" width="100" height="20" uuid="8d045f3d-5549-44cc-bd68-5150381ba597"/>
+					<textElement>
+						<font fontName="Times New Roman" size="13" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SLHD_2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="59" forecolor="#CC99FF" backcolor="#3C505C" uuid="2aee385d-b0d1-42fb-8382-71967525a2a7"/>
+				<staticText>
+					<reportElement x="146" y="19" width="346" height="33" forecolor="#FFFFFF" uuid="04b38988-ecf3-44ea-8308-d2836b606fc2"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL MONTHLY BILL STATISTICS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="68" y="5" width="69" height="47" forecolor="#FFFFFF" uuid="c355dd40-b523-4cd9-bd92-4f18f645aba9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Freestyle Script" size="18" isBold="true" isItalic="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Lucky Bookstore]]></text>
+				</staticText>
+				<image>
+					<reportElement x="2" y="0" width="68" height="57" uuid="0616e9a1-a755-48db-814f-99563da77596"/>
+					<imageExpression><![CDATA["D:\\UIT\\Lap trinh java\\bookstore\\imgs\\book4.png"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="284" height="31" forecolor="#FFFFFF" backcolor="#3C505C" uuid="aa00cef2-6c08-499e-93ea-d6d57fe2676c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="284" y="0" width="140" height="31" forecolor="#FFFFFF" backcolor="#3C505C" uuid="8fe35d33-dc1a-469f-93e8-88da13812c16"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="424" y="0" width="131" height="31" forecolor="#FFFFFF" backcolor="#3C505C" uuid="c97e0366-a3e5-46a0-999e-3953a2ded5b8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="443" y="6" width="100" height="20" forecolor="#FFFFFF" uuid="bf358170-981c-4e4f-bec7-288791296ce8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="15" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Total invoice value]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="8" width="100" height="20" forecolor="#FFFFFF" uuid="f00f8871-1abb-4f68-b509-3dbbb6df3c6a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="15" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="8" width="100" height="20" forecolor="#FFFFFF" uuid="4a918fcb-4866-456c-ae49-3d6ee9efa1e8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="15" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Day]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="284" height="33" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="94c0ad40-642f-4061-9426-1494a241632c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="284" y="0" width="140" height="33" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="4a484197-b102-48a7-85e4-ba707ba5c9e9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="424" y="0" width="131" height="33" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="df3a80b7-ca1c-4360-afc8-0b1f02d56fb9"/>
+			</rectangle>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="177" y="9" width="100" height="20" uuid="473f279c-795c-4615-a3c4-7a8535e87bfa"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TRUNC(QLNHASACH.HOADON.NGAYHD)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="7" width="100" height="20" uuid="b5779f2f-076f-4aae-b3ae-f7783d8290e7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SLHD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="7" width="100" height="20" uuid="d4beb630-c3e9-4263-9d9a-3d418fd83956"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TONGTHANHTIEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="120" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LoaiTSDaBanDuoc" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e860930-4d59-4e11-a22a-d723ae23b489">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="179"/>
+	<parameter name="SALE_YEAR" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select p.id, p.name, t.id, t.price, t.ownerId, t.address, t.square_feet, count(property_id) as SoLuong
+from sale s, the_property t, property_type p
+WHERE s.property_id = t.id and p.id = t.type and year(sale_date)=$P{SALE_YEAR}
+group by p.name
+ORDER by SoLuong desc]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="price" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ownerId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="square_feet" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SoLuong" class="java.lang.Long"/>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="79" forecolor="#FFCCCC" backcolor="#333333" uuid="b1ef32e1-1ce2-43f5-9498-68c2df30c47a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="24" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Báo cáo thống kê loại tài sản đã bán được trong năm]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="388" y="15" width="120" height="20" uuid="394fda7b-cad1-466d-98b7-dcdcba6ea1b8"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="54" y="16" width="334" height="20" uuid="483b7f72-aca6-4129-93db-5061cb98c87a"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bảng thống kê loại tài sản đã bán được]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="54" y="50" width="125" height="30" forecolor="#FFCCCC" backcolor="#333333" uuid="cf89b7ad-88c8-4769-b06a-f65b33a53686"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#999999"/>
+					<topPen lineWidth="2.0" lineColor="#999999"/>
+					<leftPen lineWidth="2.0" lineColor="#999999"/>
+					<bottomPen lineWidth="2.0" lineColor="#999999"/>
+					<rightPen lineWidth="2.0" lineColor="#999999"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã Loại Tài Sản]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="179" y="50" width="148" height="30" forecolor="#FFCCCC" backcolor="#333333" uuid="f3659e19-ad10-4096-a54e-3a14e8ce2c36"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#999999"/>
+					<topPen lineWidth="2.0" lineColor="#999999"/>
+					<leftPen lineWidth="2.0" lineColor="#999999"/>
+					<bottomPen lineWidth="2.0" lineColor="#999999"/>
+					<rightPen lineWidth="2.0" lineColor="#999999"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên Loại Tài Sản]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="327" y="50" width="181" height="30" forecolor="#FFCCCC" backcolor="#333333" uuid="74643adc-eade-43f4-aaad-9fae82ebcf74"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#999999"/>
+					<topPen lineWidth="2.0" lineColor="#999999"/>
+					<leftPen lineWidth="2.0" lineColor="#999999"/>
+					<bottomPen lineWidth="2.0" lineColor="#999999"/>
+					<rightPen lineWidth="2.0" lineColor="#999999"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số Lượng Đã Bán]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="54" y="0" width="125" height="20" uuid="a3e75026-ce5a-42c2-9197-f2ce86a75d22"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#999999"/>
+					<topPen lineWidth="2.0" lineColor="#999999"/>
+					<leftPen lineWidth="2.0" lineColor="#999999"/>
+					<bottomPen lineWidth="2.0" lineColor="#999999"/>
+					<rightPen lineWidth="2.0" lineColor="#999999"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="0" width="148" height="20" uuid="cd9ade3f-b5e1-44c4-8bfe-1894b34218e1"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#999999"/>
+					<topPen lineWidth="2.0" lineColor="#999999"/>
+					<leftPen lineWidth="2.0" lineColor="#999999"/>
+					<bottomPen lineWidth="2.0" lineColor="#999999"/>
+					<rightPen lineWidth="2.0" lineColor="#999999"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="0" width="181" height="20" uuid="4a684e16-42aa-4e58-96a8-a06b952c372c"/>
+				<box>
+					<pen lineWidth="2.0" lineColor="#999999"/>
+					<topPen lineWidth="2.0" lineColor="#999999"/>
+					<leftPen lineWidth="2.0" lineColor="#999999"/>
+					<bottomPen lineWidth="2.0" lineColor="#999999"/>
+					<rightPen lineWidth="2.0" lineColor="#999999"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Segoe UI" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLuong}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="394" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="54" y="61" width="454" height="178" uuid="62cd76c0-9adf-4233-9938-32a3b23fd130"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Tên Loại Tài Sản"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{name}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{SoLuong}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="54" y="22" width="334" height="20" uuid="707dd569-7965-440a-9946-8314adfe9315"/>
+				<textElement>
+					<font fontName="Segoe UI" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Biểu đồ minh họa]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
